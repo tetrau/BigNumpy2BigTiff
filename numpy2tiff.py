@@ -1,7 +1,7 @@
 import struct
 
 
-def numpy2tiff(image, path)
+def numpy2tiff(image, path):
     def tiff_tag(tag_code, datatype, values):
         types = {'H': 3, 'L': 4, 'Q': 16}
         datatype_code = types[datatype]
@@ -12,7 +12,6 @@ def numpy2tiff(image, path)
             values_bytes = struct.pack(datatype * number, *values)
         tag_bytes = struct.pack('HH', tag_code, datatype_code) + struct.pack('Q', number) + values_bytes
         tag_bytes += b'\x00' * (20 - len(tag_bytes))
-        print(tag_bytes.hex())
         return tag_bytes
 
     image_bytes = image.shape[0] * image.shape[1] * image.shape[2]
