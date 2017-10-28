@@ -9,8 +9,8 @@ def numpy2tiff(image, path):
         if number == 1:
             values_bytes = struct.pack(datatype, values)
         else:
-            values_bytes = struct.pack('<'+datatype[-1:] * number, *values)
-        tag_bytes = struct.pack('<HH', tag_code, datatype_code) + struct.pack('<Q', number) + values_bytes
+            values_bytes = struct.pack('<' + (datatype[-1:] * number), *values)
+        tag_bytes = struct.pack('<HHQ', tag_code, datatype_code, number) + values_bytes
         tag_bytes += b'\x00' * (20 - len(tag_bytes))
         return tag_bytes
 
